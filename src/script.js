@@ -1,13 +1,7 @@
 (function () {
     "use strict";
 
-    var PRESETS = [
-        { name: "Heritage Insurance — Motor Private", data: { client: "Heritage Insurance Kenya Ltd", lob: "Motor — Private", valuationDate: "2025-03-31", gwp: 1250, earnedPremium: 1180, policyCount: 42000, currentFrequency: 15.9, currentSeverity: 285, currentLossRatio: 72.4, targetLossRatio: 65, currentExpenseRatio: 14.6, targetExpenseRatio: 12, currentCommissionRatio: 10, targetCommissionRatio: 8, reservePosition: 42, discountRate: 12.5, riskMarginPct: 6, volatility: 18 } },
-        { name: "Pioneer General — Medical", data: { client: "Pioneer General Insurance", lob: "Medical — Group", valuationDate: "2025-03-31", gwp: 890, earnedPremium: 840, policyCount: 28000, currentFrequency: 22.4, currentSeverity: 145, currentLossRatio: 68.5, targetLossRatio: 60, currentExpenseRatio: 16.2, targetExpenseRatio: 14, currentCommissionRatio: 12, targetCommissionRatio: 10, reservePosition: 51, discountRate: 12.5, riskMarginPct: 7, volatility: 22 } },
-        { name: "Blank — Start Fresh", data: { client: "", lob: "", valuationDate: "", gwp: 0, earnedPremium: 0, policyCount: 0, currentFrequency: 0, currentSeverity: 0, currentLossRatio: 0, targetLossRatio: 65, currentExpenseRatio: 15, targetExpenseRatio: 13, currentCommissionRatio: 10, targetCommissionRatio: 8, reservePosition: 50, discountRate: 12.5, riskMarginPct: 6, volatility: 18 } }
-    ];
-
-    var baseline = JSON.parse(JSON.stringify(PRESETS[0].data));
+    var baseline = { client: "", lob: "", valuationDate: "", gwp: 0, earnedPremium: 0, policyCount: 0, currentFrequency: 0, currentSeverity: 0, currentLossRatio: 0, targetLossRatio: 65, currentExpenseRatio: 15, targetExpenseRatio: 13, currentCommissionRatio: 10, targetCommissionRatio: 8, reservePosition: 50, discountRate: 12.5, riskMarginPct: 6, volatility: 18 };
     var state = {
         freqShock: 0,
         sevShock: 0,
@@ -139,7 +133,7 @@
         opts = opts || {};
         var e = svgEl("text", { x: x, y: y, "text-anchor": opts.anchor || "middle" });
         e.textContent = text;
-        e.style.cssText = "font-size:" + (opts.size || "9px") + ";fill:" + (opts.fill || "#8A9BB0") + ";font-family:'Manrope',sans-serif;font-weight:" + (opts.weight || "400");
+        e.style.cssText = "font-size:" + (opts.size || "9px") + ";fill:" + (opts.fill || "#8A9BB0") + ";font-family:'Outfit',sans-serif;font-weight:" + (opts.weight || "400");
         return e;
     }
     function clearSvg(s, h) {
@@ -512,29 +506,6 @@
         return ok;
     }
 
-    function initPresets() {
-        var row = byId("presetRow");
-        PRESETS.forEach(function (p) {
-            var b = document.createElement("button");
-            b.className = "pb";
-            b.textContent = p.name;
-            b.addEventListener("click", function () {
-                baseline = JSON.parse(JSON.stringify(p.data));
-                configToForm(baseline);
-                row.querySelectorAll(".pb").forEach(function (x) { x.className = "pb"; });
-                b.className = "pb on";
-                validate();
-            });
-            row.appendChild(b);
-        });
-    }
-
-    function showConfigScene() {
-        byId("scene-config").classList.remove("hidden");
-        byId("scene-lab").classList.add("hidden");
-        byId("editBtn").classList.add("hidden");
-    }
-
     function showLabScene() {
         formToConfig();
         if (!validate()) return;
@@ -557,12 +528,10 @@
         byId("labMeta").textContent = (baseline.lob || "") + " · GWP: KES " + formatNumber(baseline.gwp) + "M · " + formatNumber(baseline.policyCount) + " policies" + (dt ? " · " + dt : "");
         byId("scene-config").classList.add("hidden");
         byId("scene-lab").classList.remove("hidden");
-        byId("editBtn").classList.remove("hidden");
         render();
     }
 
     function init() {
-        initPresets();
         configToForm(baseline);
         FIELD_KEYS.forEach(function (k) {
             var e = byId("c-" + k);
@@ -570,7 +539,6 @@
         });
         validate();
         byId("launchBtn").addEventListener("click", showLabScene);
-        byId("editBtn").addEventListener("click", showConfigScene);
         document.querySelectorAll(".t").forEach(function (b) {
             b.addEventListener("click", function () {
                 document.querySelectorAll(".t").forEach(function (t) { t.classList.remove("on"); });

@@ -72,15 +72,9 @@ function toggleMode(e) {
     setMessage('', 'info');
 }
 
-async function signOut() {
-    await supabase.auth.signOut();
-    location.reload();
-}
-
 export async function initAuth() {
     $('authForm').addEventListener('submit', handleSubmit);
     $('authToggle').addEventListener('click', toggleMode);
-    $('signOutBtn').addEventListener('click', signOut);
 
     const { data: { session } } = await supabase.auth.getSession();
     applySession(session);
@@ -91,9 +85,7 @@ export async function initAuth() {
 function applySession(session) {
     if (session) {
         hideOverlay();
-        $('signOutBtn').classList.remove('hidden');
     } else {
-        $('signOutBtn').classList.add('hidden');
         showOverlay('login');
     }
 }
