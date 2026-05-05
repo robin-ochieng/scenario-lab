@@ -26,7 +26,7 @@
         </div>
     </nav>
 
-    <div id="S1">
+    <div id="scene-config">
         <div class="cw">
             <div class="ch">
                 <div class="cl">K</div>
@@ -35,7 +35,7 @@
             </div>
             <div class="cp">
                 <p class="csl">Quick Start — Load a Preset</p>
-                <div class="cpr" id="pR"></div>
+                <div class="cpr" id="presetRow"></div>
             </div>
             <div class="cc">
                 <p class="cst first">Client Information</p>
@@ -149,75 +149,75 @@
                     </div>
                 </div>
             </div>
-            <div class="clnch"><button id="goBtn" class="lbtn" disabled>Launch Scenario Lab &rarr;</button>
-                <p class="lhint" id="goH">Fill in client name, GWP, policy count, and frequency to proceed.</p>
+            <div class="clnch"><button id="launchBtn" class="lbtn" disabled>Launch Scenario Lab &rarr;</button>
+                <p class="lhint" id="launchHint">Fill in client name, GWP, policy count, and frequency to proceed.</p>
             </div>
         </div>
     </div>
 
-    <div id="S2" class="hidden">
+    <div id="scene-lab" class="hidden">
         <div class="lw">
             <div class="lh">
-                <h1 id="lN"></h1>
-                <p id="lM"></p>
+                <h1 id="labName"></h1>
+                <p id="labMeta"></p>
             </div>
             <div class="lg">
                 <aside class="lc">
                     <div class="ctc">
                         <div class="ctt"><span class="ctl">Assumptions</span><button class="ctr"
-                                id="rBtn">Reset</button></div>
+                                id="resetBtn">Reset</button></div>
                         <div class="sld">
                             <div class="sld-top">
                                 <div><span class="sld-lb">Claims Frequency</span><span class="sld-sb red">Future Cash
-                                        Flows</span></div><span class="sld-v" id="vF">0%</span>
+                                        Flows</span></div><span class="sld-v" id="value-freq">0%</span>
                             </div>
                             <div class="sld-tr">
-                                <div class="sld-fl red" id="fF"></div><input type="range" min="-30" max="30" step="1"
-                                    value="0" id="iF" class="sld-in red">
+                                <div class="sld-fl red" id="fill-freq"></div><input type="range" min="-30" max="30" step="1"
+                                    value="0" id="slider-freq" class="sld-in red">
                             </div>
                             <div class="sld-mm"><span>-30%</span><span>+30%</span></div>
                         </div>
                         <div class="sld">
                             <div class="sld-top">
                                 <div><span class="sld-lb">Claim Severity</span><span class="sld-sb amber">Future Cash
-                                        Flows</span></div><span class="sld-v" id="vS">0%</span>
+                                        Flows</span></div><span class="sld-v" id="value-sev">0%</span>
                             </div>
                             <div class="sld-tr">
-                                <div class="sld-fl amber" id="fS"></div><input type="range" min="-30" max="30" step="1"
-                                    value="0" id="iS" class="sld-in amber">
+                                <div class="sld-fl amber" id="fill-sev"></div><input type="range" min="-30" max="30" step="1"
+                                    value="0" id="slider-sev" class="sld-in amber">
                             </div>
                             <div class="sld-mm"><span>-30%</span><span>+30%</span></div>
                         </div>
                         <div class="sld">
                             <div class="sld-top">
                                 <div><span class="sld-lb">Rate Change</span><span class="sld-sb teal">Revenue / CSM
-                                        Release</span></div><span class="sld-v" id="vR">0%</span>
+                                        Release</span></div><span class="sld-v" id="value-rate">0%</span>
                             </div>
                             <div class="sld-tr">
-                                <div class="sld-fl teal" id="fR"></div><input type="range" min="-15" max="25" step="1"
-                                    value="0" id="iR" class="sld-in teal">
+                                <div class="sld-fl teal" id="fill-rate"></div><input type="range" min="-15" max="25" step="1"
+                                    value="0" id="slider-rate" class="sld-in teal">
                             </div>
                             <div class="sld-mm"><span>-15%</span><span>+25%</span></div>
                         </div>
                         <div class="sld">
                             <div class="sld-top">
                                 <div><span class="sld-lb">Expense Ratio</span><span class="sld-sb purple">Fulfilment
-                                        Cash Flows</span></div><span class="sld-v" id="vE">24.6%</span>
+                                        Cash Flows</span></div><span class="sld-v" id="value-exp">24.6%</span>
                             </div>
                             <div class="sld-tr">
-                                <div class="sld-fl purple" id="fE"></div><input type="range" min="10" max="35"
-                                    step="0.5" value="24.6" id="iE" class="sld-in purple">
+                                <div class="sld-fl purple" id="fill-exp"></div><input type="range" min="10" max="35"
+                                    step="0.5" value="24.6" id="slider-exp" class="sld-in purple">
                             </div>
                             <div class="sld-mm"><span>10%</span><span>35%</span></div>
                         </div>
                         <div class="sld">
                             <div class="sld-top">
                                 <div><span class="sld-lb">Commission Ratio</span><span class="sld-sb navy">Acquisition
-                                        Costs</span></div><span class="sld-v" id="vC">12.0%</span>
+                                        Costs</span></div><span class="sld-v" id="value-comm">12.0%</span>
                             </div>
                             <div class="sld-tr">
-                                <div class="sld-fl navy" id="fC"></div><input type="range" min="5" max="25" step="0.5"
-                                    value="12" id="iC" class="sld-in navy">
+                                <div class="sld-fl navy" id="fill-comm"></div><input type="range" min="5" max="25" step="0.5"
+                                    value="12" id="slider-comm" class="sld-in navy">
                             </div>
                             <div class="sld-mm"><span>5%</span><span>25%</span></div>
                         </div>
@@ -232,7 +232,7 @@
                     </div>
                 </aside>
                 <main class="lv">
-                    <div class="tb" id="tB"><button class="t on" data-tab="exposure"><span
+                    <div class="tb" id="tabBar"><button class="t on" data-tab="exposure"><span
                                 class="t-n">Exposure</span><span class="t-d">Ratios &amp; Claims</span></button><button
                             class="t" data-tab="uprGep"><span class="t-n">UPR &amp; GEP</span><span class="t-d">Premium
                                 Earning</span></button><button class="t" data-tab="lrc"><span class="t-n">IFRS 17
@@ -240,13 +240,13 @@
                             data-tab="risk"><span class="t-n">Risk Adj.</span><span
                                 class="t-d">Sensitivity</span></button></div>
                     <div class="cb">
-                        <p class="cb-h" id="cH"></p><svg id="cv" preserveAspectRatio="xMidYMid meet"></svg>
-                        <div class="cb-lg" id="cL"></div>
+                        <p class="cb-h" id="chartTitle"></p><svg id="chart" preserveAspectRatio="xMidYMid meet"></svg>
+                        <div class="cb-lg" id="chartLegend"></div>
                     </div>
-                    <div class="kr" id="kR"></div>
+                    <div class="kr" id="kpiRow"></div>
                     <div class="ib">
-                        <p class="ib-h" id="iH"></p>
-                        <p class="ib-b" id="iB"></p>
+                        <p class="ib-h" id="insightTitle"></p>
+                        <p class="ib-b" id="insightBody"></p>
                     </div>
                     <div class="disc"><strong>Important:</strong> Illustrative scenario analysis under the IFRS 17
                         General Measurement Model. Not actuarial advice. CSM, LRC, and risk adjustment projections are
