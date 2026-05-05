@@ -531,6 +531,12 @@
         render();
     }
 
+    function showConfigScene() {
+        byId("scene-lab").classList.add("hidden");
+        byId("scene-config").classList.remove("hidden");
+        window.scrollTo({ top: 0, behavior: "instant" });
+    }
+
     function init() {
         configToForm(baseline);
         FIELD_KEYS.forEach(function (k) {
@@ -539,6 +545,7 @@
         });
         validate();
         byId("launchBtn").addEventListener("click", showLabScene);
+        byId("backBtn").addEventListener("click", showConfigScene);
         document.querySelectorAll(".t").forEach(function (b) {
             b.addEventListener("click", function () {
                 document.querySelectorAll(".t").forEach(function (t) { t.classList.remove("on"); });

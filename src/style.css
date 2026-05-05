@@ -423,6 +423,22 @@ body {
     text-decoration: underline
 }
 
+.back-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--teal);
+    font-family: var(--ff)
+}
+
+.back-btn:hover {
+    text-decoration: underline
+}
+
 .sld {
     margin-bottom: 18px
 }
