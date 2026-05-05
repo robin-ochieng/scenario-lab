@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAFS Scenario Lab</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="nav-left">
+            <div class="nav-logo">K</div>
+            <div class="nav-tw"><span class="nav-tm">KAFS Scenario Lab</span><span class="nav-ts">IFRS 17 Decision
+                    Support</span></div>
+        </div>
+        <div class="nav-right">
+            <button class="nav-edit hidden" id="editBtn">&#9998; Edit Client</button>
+            <button class="nav-edit hidden" id="signOutBtn">Sign Out</button>
+            <span class="nav-badge">Analyst Tool</span>
+        </div>
+    </nav>
+
+    <div id="S1">
+        <div class="cw">
+            <div class="ch">
+                <div class="cl">K</div>
+                <h1>KAFS Scenario Lab</h1>
+                <p>Configure client details to begin scenario analysis</p>
+            </div>
+            <div class="cp">
+                <p class="csl">Quick Start — Load a Preset</p>
+                <div class="cpr" id="pR"></div>
+            </div>
+            <div class="cc">
+                <p class="cst first">Client Information</p>
+                <div class="cr">
+                    <div class="cf w"><label>Client Name</label><input type="text" id="c-client"
+                            placeholder="e.g. Heritage Insurance Kenya Ltd"></div>
+                    <div class="cf"><label>Line of Business</label><input type="text" id="c-lob"
+                            placeholder="e.g. Motor — Private"></div>
+                </div>
+                <div class="cr">
+                    <div class="cf"><label>Valuation Date</label><input type="date" id="c-valuationDate"></div>
+                    <div class="cf"><label>GWP</label><span class="hn">Annual, KES millions</span>
+                        <div class="ig"><input type="number" id="c-gwp" step="1" min="0"><span class="un">KES M</span>
+                        </div>
+                    </div>
+                    <div class="cf"><label>Earned Premium</label><span class="hn">Annual, KES millions</span>
+                        <div class="ig"><input type="number" id="c-earnedPremium" step="1" min="0"><span class="un">KES
+                                M</span></div>
+                    </div>
+                </div>
+
+                <p class="cst">Portfolio Details</p>
+                <div class="cr">
+                    <div class="cf"><label>Policy Count</label>
+                        <div class="ig"><input type="number" id="c-policyCount" step="1" min="0"><span
+                                class="un">policies</span></div>
+                    </div>
+                    <div class="cf"><label>Claims Frequency</label><span class="hn">Per 1,000 policies</span>
+                        <div class="ig"><input type="number" id="c-currentFrequency" step="0.1" min="0"><span
+                                class="un">/ 1,000</span></div>
+                    </div>
+                    <div class="cf"><label>Avg Severity</label><span class="hn">KES thousands</span>
+                        <div class="ig"><input type="number" id="c-currentSeverity" step="1" min="0"><span
+                                class="un">KES K</span></div>
+                    </div>
+                </div>
+
+                <p class="cst">Performance Ratios — Current vs Target</p>
+                <p class="ratios-hint">Enter current and target values for each ratio. Combined ratio = Loss + Expense +
+                    Commission.</p>
+
+                <div class="cr">
+                    <div class="cf"><label>Loss Ratio (Current)</label><span class="hn">Claims / Earned Premium</span>
+                        <div class="ig"><input type="number" id="c-currentLossRatio" step="0.1"><span
+                                class="un">%</span></div>
+                    </div>
+                    <div class="cf"><label>Loss Ratio (Target)</label><span class="hn">Strategic target</span>
+                        <div class="ig"><input type="number" id="c-targetLossRatio" step="0.1"><span class="un">%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cr">
+                    <div class="cf"><label>Expense Ratio (Current)</label><span class="hn">Admin & operational</span>
+                        <div class="ig"><input type="number" id="c-currentExpenseRatio" step="0.1"><span
+                                class="un">%</span></div>
+                    </div>
+                    <div class="cf"><label>Expense Ratio (Target)</label><span class="hn">Strategic target</span>
+                        <div class="ig"><input type="number" id="c-targetExpenseRatio" step="0.1"><span
+                                class="un">%</span></div>
+                    </div>
+                </div>
+
+                <div class="cr">
+                    <div class="cf"><label>Commission Ratio (Current)</label><span class="hn">Broker & acquisition
+                            costs</span>
+                        <div class="ig"><input type="number" id="c-currentCommissionRatio" step="0.1"><span
+                                class="un">%</span></div>
+                    </div>
+                    <div class="cf"><label>Commission Ratio (Target)</label><span class="hn">Strategic target</span>
+                        <div class="ig"><input type="number" id="c-targetCommissionRatio" step="0.1"><span
+                                class="un">%</span></div>
+                    </div>
+                </div>
+
+                <div class="cr">
+                    <div class="cf"><label>Combined Ratio (Current)</label><span class="hn">Loss + Expense +
+                            Commission</span>
+                        <div class="ig"><input type="number" id="c-currentCombinedRatio" step="0.1" readonly
+                                style="background:var(--bdr-lt);color:var(--text-sec)"><span class="un">%</span></div>
+                    </div>
+                    <div class="cf"><label>Combined Ratio (Target)</label><span class="hn">Loss + Expense + Commission
+                            targets</span>
+                        <div class="ig"><input type="number" id="c-targetCombinedRatio" step="0.1" readonly
+                                style="background:var(--bdr-lt);color:var(--text-sec)"><span class="un">%</span></div>
+                    </div>
+                </div>
+
+                <p class="cst">Reserve & Actuarial Position</p>
+                <div class="cr">
+                    <div class="cf"><label>Reserve Position</label><span class="hn">Percentile in actuarial range</span>
+                        <div class="ig"><input type="number" id="c-reservePosition" step="1" min="0" max="100"><span
+                                class="un">pctl</span></div>
+                    </div>
+                    <div class="cf"></div>
+                    <div class="cf"></div>
+                </div>
+
+                <p class="cst">IFRS 17 Parameters</p>
+                <div class="cr">
+                    <div class="cf"><label>Discount Rate</label><span class="hn">Annual %</span>
+                        <div class="ig"><input type="number" id="c-discountRate" step="0.1"><span class="un">%</span>
+                        </div>
+                    </div>
+                    <div class="cf"><label>Risk Margin</label><span class="hn">% of best estimate</span>
+                        <div class="ig"><input type="number" id="c-riskMarginPct" step="0.5"><span class="un">%</span>
+                        </div>
+                    </div>
+                    <div class="cf"><label>Claims Volatility</label><span class="hn">CoV %</span>
+                        <div class="ig"><input type="number" id="c-volatility" step="1"><span class="un">%</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="clnch"><button id="goBtn" class="lbtn" disabled>Launch Scenario Lab &rarr;</button>
+                <p class="lhint" id="goH">Fill in client name, GWP, policy count, and frequency to proceed.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="S2" class="hidden">
+        <div class="lw">
+            <div class="lh">
+                <h1 id="lN"></h1>
+                <p id="lM"></p>
+            </div>
+            <div class="lg">
+                <aside class="lc">
+                    <div class="ctc">
+                        <div class="ctt"><span class="ctl">Assumptions</span><button class="ctr"
+                                id="rBtn">Reset</button></div>
+                        <div class="sld">
+                            <div class="sld-top">
+                                <div><span class="sld-lb">Claims Frequency</span><span class="sld-sb red">Future Cash
+                                        Flows</span></div><span class="sld-v" id="vF">0%</span>
+                            </div>
+                            <div class="sld-tr">
+                                <div class="sld-fl red" id="fF"></div><input type="range" min="-30" max="30" step="1"
+                                    value="0" id="iF" class="sld-in red">
+                            </div>
+                            <div class="sld-mm"><span>-30%</span><span>+30%</span></div>
+                        </div>
+                        <div class="sld">
+                            <div class="sld-top">
+                                <div><span class="sld-lb">Claim Severity</span><span class="sld-sb amber">Future Cash
+                                        Flows</span></div><span class="sld-v" id="vS">0%</span>
+                            </div>
+                            <div class="sld-tr">
+                                <div class="sld-fl amber" id="fS"></div><input type="range" min="-30" max="30" step="1"
+                                    value="0" id="iS" class="sld-in amber">
+                            </div>
+                            <div class="sld-mm"><span>-30%</span><span>+30%</span></div>
+                        </div>
+                        <div class="sld">
+                            <div class="sld-top">
+                                <div><span class="sld-lb">Rate Change</span><span class="sld-sb teal">Revenue / CSM
+                                        Release</span></div><span class="sld-v" id="vR">0%</span>
+                            </div>
+                            <div class="sld-tr">
+                                <div class="sld-fl teal" id="fR"></div><input type="range" min="-15" max="25" step="1"
+                                    value="0" id="iR" class="sld-in teal">
+                            </div>
+                            <div class="sld-mm"><span>-15%</span><span>+25%</span></div>
+                        </div>
+                        <div class="sld">
+                            <div class="sld-top">
+                                <div><span class="sld-lb">Expense Ratio</span><span class="sld-sb purple">Fulfilment
+                                        Cash Flows</span></div><span class="sld-v" id="vE">24.6%</span>
+                            </div>
+                            <div class="sld-tr">
+                                <div class="sld-fl purple" id="fE"></div><input type="range" min="10" max="35"
+                                    step="0.5" value="24.6" id="iE" class="sld-in purple">
+                            </div>
+                            <div class="sld-mm"><span>10%</span><span>35%</span></div>
+                        </div>
+                        <div class="sld">
+                            <div class="sld-top">
+                                <div><span class="sld-lb">Commission Ratio</span><span class="sld-sb navy">Acquisition
+                                        Costs</span></div><span class="sld-v" id="vC">12.0%</span>
+                            </div>
+                            <div class="sld-tr">
+                                <div class="sld-fl navy" id="fC"></div><input type="range" min="5" max="25" step="0.5"
+                                    value="12" id="iC" class="sld-in navy">
+                            </div>
+                            <div class="sld-mm"><span>5%</span><span>25%</span></div>
+                        </div>
+                    </div>
+                    <div class="im">
+                        <p class="im-t">IFRS 17 Mapping</p>
+                        <div class="im-r"><span>Frequency &amp; Severity</span><strong>Future Cash Flows</strong></div>
+                        <div class="im-r"><span>Expenses &amp; Commission</span><strong>Fulfilment CF</strong></div>
+                        <div class="im-r"><span>Rate Change</span><strong>Revenue / CSM</strong></div>
+                        <div class="im-r"><span>Profitability</span><strong>CSM Impact</strong></div>
+                        <div class="im-r"><span>Reserve Position</span><strong>LRC Strength</strong></div>
+                    </div>
+                </aside>
+                <main class="lv">
+                    <div class="tb" id="tB"><button class="t on" data-tab="exposure"><span
+                                class="t-n">Exposure</span><span class="t-d">Ratios &amp; Claims</span></button><button
+                            class="t" data-tab="uprGep"><span class="t-n">UPR &amp; GEP</span><span class="t-d">Premium
+                                Earning</span></button><button class="t" data-tab="lrc"><span class="t-n">IFRS 17
+                                LRC</span><span class="t-d">Liability &amp; CSM</span></button><button class="t"
+                            data-tab="risk"><span class="t-n">Risk Adj.</span><span
+                                class="t-d">Sensitivity</span></button></div>
+                    <div class="cb">
+                        <p class="cb-h" id="cH"></p><svg id="cv" preserveAspectRatio="xMidYMid meet"></svg>
+                        <div class="cb-lg" id="cL"></div>
+                    </div>
+                    <div class="kr" id="kR"></div>
+                    <div class="ib">
+                        <p class="ib-h" id="iH"></p>
+                        <p class="ib-b" id="iB"></p>
+                    </div>
+                    <div class="disc"><strong>Important:</strong> Illustrative scenario analysis under the IFRS 17
+                        General Measurement Model. Not actuarial advice. CSM, LRC, and risk adjustment projections are
+                        indicative. Formal actuarial valuation required for reporting.</div>
+                    <div class="lf"><span class="lf-b">KENBRIGHT ACTUARIAL &amp; FINANCIAL SERVICES</span><span
+                            class="lf-r">KAFS Scenario Lab &middot; IFRS 17 Decision Support &middot; Internal Use
+                            Only</span></div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <div id="authOverlay" class="auth-overlay" data-mode="loading">
+        <div class="auth-card">
+            <div class="auth-loading">
+                <div class="auth-spinner"></div>
+            </div>
+            <div class="auth-content">
+                <div class="auth-brand">
+                    <div class="auth-logo">K</div>
+                    <h2>KAFS Scenario Lab</h2>
+                    <p>IFRS 17 Decision Support</p>
+                </div>
+                <h1 class="auth-title">
+                    <span class="login-text">Sign in to continue</span>
+                    <span class="signup-text">Create your account</span>
+                </h1>
+                <form id="authForm" class="auth-form" novalidate>
+                    <div class="auth-field">
+                        <label for="authEmail">Email</label>
+                        <input id="authEmail" type="email" autocomplete="email" required>
+                    </div>
+                    <div class="auth-field">
+                        <label for="authPassword">Password</label>
+                        <input id="authPassword" type="password" autocomplete="current-password" required minlength="6">
+                    </div>
+                    <p id="authMsg" class="auth-msg"></p>
+                    <button id="authSubmit" type="submit" class="auth-submit">
+                        <span class="login-text">Sign In</span>
+                        <span class="signup-text">Create Account</span>
+                    </button>
+                    <p class="auth-toggle-row">
+                        <span class="login-text">Don't have an account?</span>
+                        <span class="signup-text">Already have an account?</span>
+                        <a id="authToggle" href="#">
+                            <span class="login-text">Sign up</span>
+                            <span class="signup-text">Sign in</span>
+                        </a>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
